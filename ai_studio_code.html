@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Landmark Hotel | Hajipur's Premier Culinary Sanctuary</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Playfair Display & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        gold: {
+                            50: '#fdfbf7',
+                            100: '#fbf7ed',
+                            400: '#e5c158',
+                            500: '#d4af37', // Premium boutique gold
+                            600: '#b8962c',
+                        },
+                        dark: {
+                            950: '#050505',
+                            900: '#0a0a0a',
+                            800: '#121212',
+                            700: '#1c1c1c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Textured Grain Overlay */
+        .texture-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Fluid Premium Glassmorphism */
+        .glass-card {
+            background: rgba(18, 18, 18, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+        }
+        
+        .glass-card-hover {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-card-hover:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(212, 175, 55, 0.25);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255,255,255,0.1);
+            transform: translateY(-5px);
+        }
+
+        /* Custom Follow Cursor elements */
+        #custom-cursor-ring {
+            position: fixed;
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(214, 175, 55, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+            transition-timing-function: cubic-bezier(0.1, 0.8, 0.2, 1);
+        }
+        #custom-cursor-dot {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background-color: #d4af37;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10001;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Hide standard cursor on desktop viewports */
+        @media (min-width: 1024px) {
+            body {
+                cursor: none;
+            }
+            a, button, input, select, textarea, [role="button"] {
+                cursor: none;
+            }
+        }
+
+        /* Reveal on scroll base classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Kinetic Ambient Background Blobs */
+        .blob-bg {
+            filter: blur(100px);
+            mix-blend-mode: screen;
+            animation: floatBlob 20s infinite alternate ease-in-out;
+        }
+        @keyframes floatBlob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            50% { transform: translate(60px, -80px) scale(1.2); }
+            100% { transform: translate(-30px, 40px) scale(0.85); }
+        }
+
+        /* Marquee Text Scroller Animation */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            animation: marquee 25s linear infinite;
+        }
+
+        /* Styled Accordion Transitions */
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+        .faq-item.active .faq-content {
+            max-height: 200px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-dark-950 text-gray-200 font-sans overflow-x-hidden antialiased selection:bg-gold-500 selection:text-dark-900">
+
+    <!-- Subtle texture overlay -->
+    <div class="texture-overlay"></div>
+
+    <!-- Custom Cursor markup -->
+    <div id="custom-cursor-ring" class="hidden lg:block"></div>
+    <div id="custom-cursor-dot" class="hidden lg:block"></div>
+
+    <!-- Soft background ambient lighting lights -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div class="blob-bg absolute top-[15%] left-[8%] w-[400px] h-[400px] bg-gold-500/5 rounded-full"></div>
+        <div class="blob-bg absolute bottom-[25%] right-[8%] w-[500px] h-[500px] bg-amber-600/5 rounded-full" style="animation-delay: -6s;"></div>
+    </div>
+
+    <!-- Sticky Floating Action ribbon (Micro-conversions) -->
+    <div class="fixed bottom-6 left-6 z-50 flex flex-col gap-3">
+        <!-- Floating Phone Call CTA -->
+        <a href="tel:+919155298225" class="glass-card hover:bg-gold-500 hover:text-dark-900 text-gold-500 w-12 h-12 flex items-center justify-center rounded-full transition-all shadow-lg border border-gold-500/20 group">
+            <i class="fa-solid fa-phone group-hover:scale-110 transition-transform"></i>
+        </a>
+        <!-- Floating WhatsApp Assistant Button -->
+        <a href="https://wa.me/919155298225?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20table%20reservations%20at%20The%20Landmark%20Hotel." target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white w-12 h-12 flex items-center justify-center rounded-full transition-all shadow-lg group">
+            <i class="fa-brands fa-whatsapp text-xl group-hover:scale-110 transition-transform"></i>
+        </a>
+    </div>
+
+    <!-- Sticky Main Reservation Trigger -->
+    <button onclick="openReservationModal()" class="fixed bottom-6 right-6 z-50 glass-card bg-gold-500/10 text-gold-400 hover:bg-gold-500 hover:text-dark-900 border border-gold-500/25 px-6 py-3.5 rounded-full font-medium tracking-wider text-xs uppercase flex items-center gap-3 transition-all shadow-2xl shadow-black/60 group">
+        <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-gold-500"></span>
+        </span>
+        Reserve A Table
+    </button>
+
+    <!-- Translucent Luxury Navbar -->
+    <header class="fixed top-0 w-full z-40 transition-all duration-300 border-b border-transparent" id="main-header">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-24 flex items-center justify-between">
+            <a href="#" class="font-serif text-lg lg:text-2xl tracking-[0.2em] text-white hover:text-gold-500 transition-colors">
+                THE LANDMARK
+            </a>
+            
+            <nav class="hidden md:flex items-center gap-8 text-[11px] uppercase tracking-[0.25em] text-gray-300">
+                <a href="#about" class="hover:text-gold-500 transition-colors">Our Story</a>
+                <a href="#vibe-engine" class="hover:text-gold-500 transition-colors">Discover</a>
+                <a href="#timeline" class="hover:text-gold-500 transition-colors">A Day Inside</a>
+                <a href="#menu" class="hover:text-gold-500 transition-colors">Menu Highlights</a>
+                <a href="#gallery" class="hover:text-gold-500 transition-colors">Gallery</a>
+                <a href="#faq" class="hover:text-gold-500 transition-colors">Inquiries</a>
+            </nav>
+
+            <div class="flex items-center gap-6">
+                <a href="tel:+919155298225" class="hidden lg:inline-block text-xs uppercase tracking-widest text-gold-400 font-medium hover:text-white transition-colors">
+                    +91 91552 98225
+                </a>
+                <button onclick="openReservationModal()" class="glass-card hover:bg-white hover:text-dark-900 text-[10px] text-white uppercase tracking-[0.2em] px-6 py-3 rounded border border-white/10 transition-all font-medium">
+                    Reserve
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Dual Layer Visuals -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden z-10 pt-24 pb-12">
+        <!-- Parallax Background Layer -->
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-dark-950/30 via-dark-950/70 to-dark-950 z-10"></div>
+            <img id="hero-img" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=80" alt="The Landmark Hotel Hajipur Ambience" class="w-full h-full object-cover scale-110 transition-transform duration-700 ease-out origin-center">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-12 gap-12 items-center relative z-20 w-full">
+            <div class="lg:col-span-7 text-left">
+                <p class="text-gold-500 uppercase tracking-[0.4em] text-xs font-semibold mb-4">ANWARPUR CHOWK, HAJIPUR</p>
+                <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl text-white mb-6 leading-[1.1] tracking-tight">
+                    Where culinary <br><span class="italic text-gold-500 font-light">refinement</span> meets genuine comfort.
+                </h1>
+                <p class="max-w-xl text-gray-300 text-sm md:text-base mb-8 font-light leading-relaxed">
+                    Step inside Vaishali's premier dining retreat. Indulge in cozy elegance, fine mocktails, artisanal coffee, and unparalleled sensory accessibility.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row items-center gap-4">
+                    <button onclick="openReservationModal()" class="w-full sm:w-auto px-8 py-4 bg-gold-500 text-dark-900 font-semibold tracking-widest text-[11px] uppercase rounded hover:bg-white transition-all duration-300 shadow-xl">
+                        Book Table
+                    </button>
+                    <a href="#vibe-engine" class="w-full sm:w-auto px-8 py-4 glass-card border border-white/10 hover:border-gold-500 text-white text-center font-semibold tracking-widest text-[11px] uppercase rounded transition-all duration-300">
+                        Explore Your Vibe
+                    </a>
+                </div>
+            </div>
+
+            <!-- Floating Elegant Info Plate -->
+            <div class="lg:col-span-5 hidden lg:block">
+                <div class="glass-card p-8 rounded-2xl border border-white/5 shadow-2xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-gold-500/10 rounded-full blur-2xl"></div>
+                    <span class="text-gold-500 text-xs uppercase tracking-widest font-semibold block mb-2">NOW OPEN DAILY</span>
+                    <h3 class="font-serif text-white text-2xl mb-4">Hours of Sanctuary</h3>
+                    <div class="space-y-3 text-xs text-gray-400">
+                        <div class="flex justify-between pb-2 border-b border-white/5">
+                            <span>Lunch Lounge</span>
+                            <span class="text-white">12:00 PM – 04:00 PM</span>
+                        </div>
+                        <div class="flex justify-between pb-2 border-b border-white/5">
+                            <span>Sunset Brews & Pastries</span>
+                            <span class="text-white">04:00 PM – 07:00 PM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Dinner Service</span>
+                            <span class="text-white">07:00 PM – 11:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Down indicator -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20">
+            <span class="text-[9px] uppercase tracking-[0.3em] text-gray-400 font-light">Scroll Down</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-gold-500 to-transparent"></div>
+        </div>
+    </section>
+
+    <!-- Infinite horizontal marquee ticker -->
+    <div class="relative z-20 bg-dark-900 border-y border-white/5 py-4 overflow-hidden">
+        <div class="flex whitespace-nowrap animate-marquee text-xs uppercase tracking-[0.35em] text-gray-400 font-light">
+            <span>• ACCESSIBLE DINING • SPECIALTY MOCKTAILS • TRADITIONAL MEETS CONTEMPORARY • HAJIPUR'S FINEST • WHEELCHAIR ACCESSIBLE ENTRY & TOILETS • ARTISANAL COFFEE & DESSERT • FAMILY INCLUSIVE • </span>
+            <span>• ACCESSIBLE DINING • SPECIALTY MOCKTAILS • TRADITIONAL MEETS CONTEMPORARY • HAJIPUR'S FINEST • WHEELCHAIR ACCESSIBLE ENTRY & TOILETS • ARTISANAL COFFEE & DESSERT • FAMILY INCLUSIVE • </span>
+        </div>
+    </div>
+
+    <!-- Storytelling Section -->
+    <section id="about" class="py-24 lg:py-32 relative z-20 max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+            
+            <!-- Side visuals with offset stack framing -->
+            <div class="lg:col-span-5 relative group reveal">
+                <div class="absolute -inset-2 bg-gradient-to-r from-gold-500/10 to-amber-500/10 rounded-lg blur-xl opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+                
+                <div class="relative rounded-xl overflow-hidden glass-card p-2">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80" alt="Gourmet presentation" class="rounded-lg w-full h-[480px] object-cover filter brightness-90 transition duration-700 group-hover:scale-105">
+                </div>
+                <!-- Layered mini panel -->
+                <div class="absolute -bottom-6 -right-6 glass-card px-6 py-5 rounded-xl border border-gold-500/20 max-w-xs shadow-2xl hidden md:block">
+                    <p class="text-gold-500 font-serif text-lg italic mb-1">“Top Notch Coffee & Dessert”</p>
+                    <p class="text-[10px] text-gray-400 uppercase tracking-widest">Google Local Guide Review</p>
+                </div>
+            </div>
+
+            <!-- Deep Story Content -->
+            <div class="lg:col-span-7 flex flex-col justify-center reveal">
+                <span class="text-xs uppercase tracking-[0.3em] text-gold-500 font-semibold mb-3">Our Mission</span>
+                <h2 class="font-serif text-4xl lg:text-5xl text-white mb-6 leading-tight">
+                    Hajipur's Elevated Lounge Concept
+                </h2>
+                <p class="text-gray-300 leading-relaxed mb-6 font-light">
+                    The Landmark Hotel has quickly set a benchmark in Hajipur, localizing international hospitality aesthetics. Designed with a clean, trendy layout, our space pairs physical comfort with deep warmth. 
+                </p>
+                <p class="text-gray-300 leading-relaxed mb-8 font-light">
+                    Whether you are gathering for an intimate solo meal, a group dinner, or celebrating a quiet landmark moment, our modern menu featuring everything from exquisite plates to specialty mocktails promises an effortless feast.
+                </p>
+
+                <!-- Local Rating Metrices -->
+                <div class="grid grid-cols-3 gap-6 pt-6 border-t border-white/5">
+                    <div>
+                        <p class="font-serif text-3xl text-gold-500 font-semibold mb-1">4.5 <span class="text-lg">★</span></p>
+                        <p class="text-[10px] uppercase tracking-wider text-gray-400">Google Rating (53+ Reviews)</p>
+                    </div>
+                    <div>
+                        <p class="font-serif text-3xl text-gold-500 font-semibold mb-1">100%</p>
+                        <p class="text-[10px] uppercase tracking-wider text-gray-400">Accessible Space</p>
+                    </div>
+                    <div>
+                        <p class="font-serif text-3xl text-gold-500 font-semibold mb-1">Cozy</p>
+                        <p class="text-[10px] uppercase tracking-wider text-gray-400">Quiet & Trendy Vibe</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- NEW: Interactive Taste/Vibe Profile Engine -->
+    <section id="vibe-engine" class="py-24 relative z-20 bg-dark-900/60 border-y border-white/5">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <span class="text-xs uppercase tracking-[0.3em] text-gold-500 font-semibold mb-3 block">Micro-Interaction</span>
+            <h2 class="font-serif text-3xl md:text-4xl text-white mb-4">Discover Your Landmark Match</h2>
+            <p class="text-gray-400 text-xs md:text-sm font-light max-w-xl mx-auto mb-10">
+                Choose your mood or dining preference below, and our generator will suggest your dynamic tasting profile.
+            </p>
+
+            <!-- Vibe selection filters -->
+            <div class="flex flex-wrap justify-center gap-3 mb-10">
+                <button onclick="revealVibe('focused')" class="vibe-btn active px-6 py-2.5 rounded-full text-xs font-medium uppercase tracking-wider border border-gold-500 bg-gold-500/10 text-gold-500 transition-all duration-300">Quiet / Focused</button>
+                <button onclick="revealVibe('social')" class="vibe-btn px-6 py-2.5 rounded-full text-xs font-medium uppercase tracking-wider border border-white/5 text-gray-400 hover:text-white transition-all duration-300">Social / Festive</button>
+                <button onclick="revealVibe('indulgent')" class="vibe-btn px-6 py-2.5 rounded-full text-xs font-medium uppercase tracking-wider border border-white/5 text-gray-400 hover:text-white transition-all duration-300">Indulgent / Sweet</button>
+            </div>
+
+            <!-- Suggestion card wrapper with glassmorphic styling -->
+            <div id="vibe-card" class="glass-card p-8 rounded-2xl max-w-2xl mx-auto border border-white/10 relative overflow-hidden transition-all duration-500">
+                <div class="grid md:grid-cols-2 gap-8 items-center text-left">
+                    <img id="vibe-img" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80" alt="Quiet vibe" class="w-full h-44 object-cover rounded-lg">
+                    <div>
+                        <span id="vibe-tag" class="text-gold-500 text-[10px] uppercase tracking-widest font-semibold block mb-1">Morning Setup</span>
+                        <h4 id="vibe-title" class="font-serif text-xl text-white mb-2">Single Origin Macchiato</h4>
+                        <p id="vibe-desc" class="text-xs text-gray-400 leading-relaxed font-light">
+                            Crafted for focused early mornings or calm business slots. Rich coffee notes paired with delicate dairy foam layers.
+                        </p>
+                        <button onclick="openReservationModal()" class="text-[10px] uppercase tracking-wider font-semibold text-gold-400 mt-4 hover:text-white flex items-center gap-1.5 transition-all">
+                            Reserve for this Vibe <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Storytelling Timeline ("A Day inside Landmark") -->
+    <section id="timeline" class="py-24 lg:py-32 relative z-20 max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+            <span class="text-xs uppercase tracking-[0.3em] text-gold-500 font-semibold mb-3">The Narrative</span>
+            <h2 class="font-serif text-4xl text-white">Chronology of Sensory Experiences</h2>
+            <p class="text-gray-400 text-sm font-light mt-4">
+                Watch how our space naturally shifts through moods as the daylight moves across the Vaishali skies.
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-4 gap-8 reveal">
+            <!-- Hour 1 -->
+            <div class="glass-card p-6 rounded-xl border border-white/5 flex flex-col justify-between h-[320px] glass-card-hover group">
+                <div>
+                    <span class="font-serif text-4xl text-gold-500/20 group-hover:text-gold-500 transition-colors block mb-4">12:00</span>
+                    <h4 class="font-serif text-lg text-white mb-2">The Early Warmth</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed font-light">
+                        As sunlight floods our open entrance, the soft clatter of coffee mugs blends with relaxing jazz backgrounds.
+                    </p>
+                </div>
+                <span class="text-[9px] uppercase tracking-widest text-gold-500/60 block mt-4">Calming Lounge Mood</span>
+            </div>
+
+            <!-- Hour 2 -->
+            <div class="glass-card p-6 rounded-xl border border-white/5 flex flex-col justify-between h-[320px] glass-card-hover group" style="transition-delay: 100ms;">
+                <div>
+                    <span class="font-serif text-4xl text-gold-500/20 group-hover:text-gold-500 transition-colors block mb-4">14:00</span>
+                    <h4 class="font-serif text-lg text-white mb-2">The Mid-Day Feast</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed font-light">
+                        Tables fill with families and groups enjoying sharing plates, regional savory lunch dishes, and cool botanical mocktails.
+                    </p>
+                </div>
+                <span class="text-[9px] uppercase tracking-widest text-gold-500/60 block mt-4">Lively Social Vibe</span>
+            </div>
+
+            <!-- Hour 3 -->
+            <div class="glass-card p-6 rounded-xl border border-white/5 flex flex-col justify-between h-[320px] glass-card-hover group" style="transition-delay: 200ms;">
+                <div>
+                    <span class="font-serif text-4xl text-gold-500/20 group-hover:text-gold-500 transition-colors block mb-4">17:00</span>
+                    <h4 class="font-serif text-lg text-white mb-2">The Golden Hour</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed font-light">
+                        Pastry plates and freshly ground single-origin coffees grace the table during Hajipur's quietest window.
+                    </p>
+                </div>
+                <span class="text-[9px] uppercase tracking-widest text-gold-500/60 block mt-4">Quiet Sensory Space</span>
+            </div>
+
+            <!-- Hour 4 -->
+            <div class="glass-card p-6 rounded-xl border border-white/5 flex flex-col justify-between h-[320px] glass-card-hover group" style="transition-delay: 300ms;">
+                <div>
+                    <span class="font-serif text-4xl text-gold-500/20 group-hover:text-gold-500 transition-colors block mb-4">20:30</span>
+                    <h4 class="font-serif text-lg text-white mb-2">The Candlelit Dinner</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed font-light">
+                        Our venue is illuminated in warm golden light, providing cozy corners for solo dining and celebrations.
+                    </p>
+                </div>
+                <span class="text-[9px] uppercase tracking-widest text-gold-500/60 block mt-4">Elegant Dinner Mood</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Menu Section -->
+    <section id="menu" class="py-24 lg:py-32 relative z-20 bg-dark-900/40">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            
+            <div class="flex flex-col md:flex-row items-start md:items-end justify-between mb-16 reveal">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.3em] text-gold-500 font-semibold mb-3 block">Carefully Curated</span>
+                    <h2 class="font-serif text-4xl lg:text-5xl text-white">Menu Masterpieces</h2>
+                </div>
+                <!-- Category Tabs with Glass transitions -->
+                <div class="flex gap-3 mt-6 md:mt-0 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
+                    <button onclick="filterMenu('all')" class="menu-tab-btn active text-xs uppercase tracking-wider px-5 py-2.5 rounded-full border border-gold-500 text-gold-500 bg-gold-500/10 transition-all">All</button>
+                    <button onclick="filterMenu('dessert')" class="menu-tab-btn text-xs uppercase tracking-wider px-5 py-2.5 rounded-full border border-white/5 text-gray-400 hover:text-white transition-all">Desserts</button>
+                    <button onclick="filterMenu('drinks')" class="menu-tab-btn text-xs uppercase tracking-wider px-5 py-2.5 rounded-full border border-white/5 text-gray-400 hover:text-white transition-all">Brews & Sips</button>
+                    <button onclick="filterMenu('plates')" class="menu-tab-btn text-xs uppercase tracking-wider px-5 py-2.5 rounded-full border border-white/5 text-gray-400 hover:text-white transition-all">Small Plates</button>
+                </div>
+            </div>
+
+            <!-- Menu Grid layout -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="menu-container">
+                
+                <!-- Item 1: Espresso Brew -->
+                <div class="menu-item drinks glass-card glass-card-hover p-4 rounded-xl transition-all duration-500 reveal">
+                    <div class="h-60 rounded-lg overflow-hidden mb-5 relative">
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80" alt="Specialty Coffee" class="w-full h-full object-cover">
+                        <span class="absolute top-3 right-3 bg-dark-900/80 backdrop-blur text-gold-500 text-[10px] uppercase tracking-widest px-3 py-1 rounded-full font-semibold">Specialty Brew</span>
+                    </div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-serif text-lg text-white font-medium">Single Origin Macchiato</h3>
+                        <span class="text-gold-500 font-semibold">₹185</span>
+                    </div>
+                    <p class="text-xs text-gray-400 font-light leading-relaxed">Artisanal extraction with premium microfoam, crafted specifically for coffee lovers.</p>
+                </div>
+
+                <!-- Item 2: Signature Dessert -->
+                <div class="menu-item dessert glass-card glass-card-hover p-4 rounded-xl transition-all duration-500 reveal">
+                    <div class="h-60 rounded-lg overflow-hidden mb-5 relative">
+                        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=800&q=80" alt="Belgian Waffles" class="w-full h-full object-cover">
+                        <span class="absolute top-3 right-3 bg-dark-900/80 backdrop-blur text-gold-500 text-[10px] uppercase tracking-widest px-3 py-1 rounded-full font-semibold">House Special</span>
+                    </div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-serif text-lg text-white font-medium">Glazed Hot Fudge Fondant</h3>
+                        <span class="text-gold-500 font-semibold">₹260</span>
+                    </div>
+                    <p class="text-xs text-gray-400 font-light leading-relaxed">Deep dark chocolate crumb paired with soft artisan ice-cream. Perfect for sharing or pure solo indulgence.</p>
+                </div>
+
+                <!-- Item 3: Craft Mocktail -->
+                <div class="menu-item drinks glass-card glass-card-hover p-4 rounded-xl transition-all duration-500 reveal">
+                    <div class="h-60 rounded-lg overflow-hidden mb-5 relative">
+                        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80" alt="Artisanal Mocktail" class="w-full h-full object-cover">
+                        <span class="absolute top-3 right-3 bg-dark-900/80 backdrop-blur text-gold-500 text-[10px] uppercase tracking-widest px-3 py-1 rounded-full font-semibold">Signature</span>
+                    </div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-serif text-lg text-white font-medium">Citrus Botanical Infusion</h3>
+                        <span class="text-gold-500 font-semibold">₹220</span>
+                    </div>
+                    <p class="text-xs text-gray-400 font-light leading-relaxed">Muddled organic herbs with premium carbonated tonic and a rich vanilla, ginger syrup underlay.</p>
+                </div>
+
+                <!-- Item 4: Small Plate -->
+                <div class="menu-item plates glass-card glass-card-hover p-4 rounded-xl transition-all duration-500 reveal">
+                    <div class="h-60 rounded-lg overflow-hidden mb-5 relative">
+                        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Plates Platter" class="w-full h-full object-cover">
+                        <span class="absolute top-3 right-3 bg-dark-900/80 backdrop-blur text-gold-500 text-[10px] uppercase tracking-widest px-3 py-1 rounded-full font-semibold">Savory</span>
+                    </div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-serif text-lg text-white font-medium">Smoked Truffle Potato Wedges</h3>
+                        <span class="text-gold-500 font-semibold">₹190</span>
+                    </div>
+                    <p class="text-xs text-gray-400 font-light leading-relaxed">Golden hand-cut potato chunks kissed with real dynamic truffle oil and sea salt flakes.</p>
+                </div>
+
+                <!-- Item 5: All-you-can-eat thali layout -->
+                <div class="menu-item plates glass-card glass-card-hover p-4 rounded-xl transition-all duration-500 reveal">
+                    <div class="h-60 rounded-lg overflow-hidden mb-5 relative">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Lunch Platter" class="w-full h-full object-cover">
+                        <span class="absolute top-3 right-3 bg-dark-900/80 backdrop-blur text-gold-500 text-[10px] uppercase tracking-widest px-3 py-1 rounded-full font-semibold">Signature Feast</span>
+                    </div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-serif text-lg text-white font-medium">Curated Gourmet Thali</h3>
+                        <span class="text-gold-500 font-semibold">₹340</span>
+                    </div>
+                    <p class="text-xs text-gray-400 font-light leading-relaxed">A beautifully structured plate featuring chef-crafted regional specials, custom condiments, and hot breads.</p>
+                </div>
+
+                <!-- Item 6: Caramelized Dessert -->
+                <div class="menu-item dessert glass-card glass-card-hover p-4 rounded-xl transition-all duration-500 reveal">
+                    <div class="h-60 rounded-lg overflow-hidden mb-5 relative">
+                        <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=800&q=80" alt="Gourmet pastry" class="w-full h-full object-cover">
+                        <span class="absolute top-3 right-3 bg-dark-900/80 backdrop-blur text-gold-500 text-[10px] uppercase tracking-widest px-3 py-1 rounded-full font-semibold">Luxe</span>
+                    </div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-serif text-lg text-white font-medium">Caramelized Hazelnut Torte</h3>
+                        <span class="text-gold-500 font-semibold">₹280</span>
+                    </div>
+                    <p class="text-xs text-gray-400 font-light leading-relaxed">Delicately layered mousse structured with high-grade Venezuelan cocoa and toasted Turkish hazelnuts.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Elegant Offset Gallery Grid -->
+    <section id="gallery" class="py-24 lg:py-32 relative z-20 max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="text-center max-w-xl mx-auto mb-16 reveal">
+            <span class="text-xs uppercase tracking-[0.3em] text-gold-500 font-semibold mb-3">Spatial Aesthetics</span>
+            <h2 class="font-serif text-4xl text-white">The Atmosphere Grid</h2>
+            <p class="text-gray-400 text-sm font-light mt-3">
+                A brief overview of our cozy corners, active prep kitchen, and accessible seating.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 reveal">
+            <!-- Large Focus -->
+            <div class="md:col-span-8 group relative overflow-hidden rounded-xl border border-white/5 h-96">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" alt="Main dining area" class="w-full h-full object-cover filter brightness-75 transition-all duration-700 group-hover:scale-105 group-hover:brightness-90">
+                <div class="absolute bottom-6 left-6 z-10">
+                    <span class="text-xs uppercase tracking-widest text-gold-500 font-semibold">Main Lounge</span>
+                    <h4 class="font-serif text-xl text-white mt-1">Trendy Seating & Layout</h4>
+                </div>
+            </div>
+
+            <!-- Tall Side -->
+            <div class="md:col-span-4 group relative overflow-hidden rounded-xl border border-white/5 h-96">
+                <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=800&q=80" alt="Detail plating" class="w-full h-full object-cover filter brightness-75 transition-all duration-700 group-hover:scale-105 group-hover:brightness-90">
+                <div class="absolute bottom-6 left-6 z-10">
+                    <span class="text-xs uppercase tracking-widest text-gold-500 font-semibold">Plating Depth</span>
+                    <h4 class="font-serif text-xl text-white mt-1">Fresh Dessert Display</h4>
+                </div>
+            </div>
+
+            <!-- Small Detail 1 -->
+            <div class="md:col-span-4 group relative overflow-hidden rounded-xl border border-white/5 h-72">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80" alt="Espresso extraction" class="w-full h-full object-cover filter brightness-75 transition-all duration-700 group-hover:scale-105 group-hover:brightness-90">
+                <div class="absolute bottom-6 left-6 z-10">
+                    <span class="text-xs uppercase tracking-widest text-gold-500 font-semibold">Coffee Bar</span>
+                    <h4 class="font-serif text-xl text-white mt-1">Espresso Extractions</h4>
+                </div>
+            </div>
+
+            <!-- Wide Detail 2 -->
+            <div class="md:col-span-8 group relative overflow-hidden rounded-xl border border-white/5 h-72">
+                <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1200&q=80" alt="Cocktail creation" class="w-full h-full object-cover filter brightness-75 transition-all duration-700 group-hover:scale-105 group-hover:brightness-90">
+                <div class="absolute bottom-6 left-6 z-10">
+                    <span class="text-xs uppercase tracking-widest text-gold-500 font-semibold">Mixology Area</span>
+                    <h4 class="font-serif text-xl text-white mt-1">Specialty Craft Mocktails</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Grid -->
+    <section id="amenities" class="py-24 relative z-20 max-w-7xl mx-auto px-6 lg:px-12 bg-dark-900/30 border-y border-white/5">
+        <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+            <span class="text-xs uppercase tracking-[0.3em] text-gold-500 font-semibold mb-3">Designed for Everyone</span>
+            <h2 class="font-serif text-4xl text-white">Thoughtful Accessibility Standards</h2>
+            <p class="text-gray-400 text-sm font-light mt-4">
+                We believe standard hospitality includes high inclusivity. The Landmark Hotel is engineered to support modern physical and sensory comfort levels.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+            
+            <!-- Service 1: Wheelchair Access -->
+            <div class="glass-card glass-card-hover p-6 rounded-xl border border-white/5 flex flex-col items-center text-center">
+                <div class="w-12 h-12 rounded-full bg-gold-500/10 text-gold-500 flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-wheelchair text-xl"></i>
+                </div>
+                <h3 class="font-serif text-white font-medium mb-2">Fully Accessible</h3>
+                <p class="text-xs text-gray-400 font-light leading-relaxed">
+                    Designed with level entries, dedicated wheelchair parking, flat indoor layouts, and accessible restrooms.
+                </p>
+            </div>
+
+            <!-- Service 2: Flexible Ordering Options -->
+            <div class="glass-card glass-card-hover p-6 rounded-xl border border-white/5 flex flex-col items-center text-center">
+                <div class="w-12 h-12 rounded-full bg-gold-500/10 text-gold-500 flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-car-side text-xl"></i>
+                </div>
+                <h3 class="font-serif text-white font-medium mb-2">Flexible Dining Options</h3>
+                <p class="text-xs text-gray-400 font-light leading-relaxed">
+                    Enjoy kerbside pickup, rapid contactless delivery, seamless drive-through processing, or stylized table services.
+                </p>
+            </div>
+
+            <!-- Service 3: Family Support -->
+            <div class="glass-card glass-card-hover p-6 rounded-xl border border-white/5 flex flex-col items-center text-center">
+                <div class="w-12 h-12 rounded-full bg-gold-500/10 text-gold-500 flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-baby text-xl"></i>
+                </div>
+                <h3 class="font-serif text-white font-medium mb-2">Family & Group Friendly</h3>
+                <p class="text-xs text-gray-400 font-light leading-relaxed">
+                    Child-safe spaces with custom kids menus, changing tables, and spacious seating configurations. Fully LGBTQ+ friendly environment.
+                </p>
+            </div>
+
+            <!-- Service 4: Sensory Layout -->
+            <div class="glass-card glass-card-hover p-6 rounded-xl border border-white/5 flex flex-col items-center text-center">
+                <div class="w-12 h-12 rounded-full bg-gold-500/10 text-gold-500 flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-ear-deaf text-xl"></i>
+                </div>
+                <h3 class="font-serif text-white font-medium mb-2">Sensory Comfort</h3>
+                <p class="text-xs text-gray-400 font-light leading-relaxed">
+                    Layout keeping noise levels quiet and comfortable, complete with assistive hearing loop services inside our main dining halls.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Testimonials Slider Section -->
+    <section class="py-24 lg:py-32 relative z-20">
+        <div class="max-w-4xl mx-auto px-6 text-center reveal">
+            <span class="text-xs uppercase tracking-[0.3em] text-gold-500 font-semibold mb-3">Patron Reviews</span>
+            <h2 class="font-serif text-3xl md:text-4xl text-white mb-12">Shared Experiences</h2>
+
+            <!-- Testimonial slide container -->
+            <div class="relative min-h-[220px] flex items-center justify-center">
+                <div id="testimonial-slide-1" class="testimonial-slide transition-opacity duration-500 opacity-100 absolute inset-x-0 mx-auto">
+                    <p class="font-serif text-lg md:text-xl lg:text-2xl text-gray-200 italic leading-relaxed mb-6">
+                        "The Landmark Hotel is an incredible dining experience in Hajipur. The wheelchair ramps are perfectly level, and the coffee with chocolate dessert tasted absolutely world-class."
+                    </p>
+                    <p class="text-xs uppercase tracking-[0.2em] text-gold-500 font-semibold">Anand Vardhan</p>
+                    <p class="text-[9px] text-gray-500 uppercase tracking-widest mt-1">Google Local Guide • March 2026</p>
+                </div>
+
+                <div id="testimonial-slide-2" class="testimonial-slide transition-opacity duration-500 opacity-0 absolute inset-x-0 mx-auto">
+                    <p class="font-serif text-lg md:text-xl lg:text-2xl text-gray-200 italic leading-relaxed mb-6">
+                        "Loved their curated thali and the casual, cozy vibe. Finding a trendy restaurant with such high standard accessibility and clean parking space in Vaishali is revolutionary."
+                    </p>
+                    <p class="text-xs uppercase tracking-[0.2em] text-gold-500 font-semibold">Preeti Roy</p>
+                    <p class="text-[9px] text-gray-500 uppercase tracking-widest mt-1">Google Reviewer • January 2026</p>
+                </div>
+            </div>
+
+            <!-- Slides indicators -->
+            <div class="flex justify-center gap-3 mt-8">
+                <button onclick="switchTestimonial(0)" id="t-dot-0" class="w-2 h-2 rounded-full bg-gold-500 transition-all"></button>
+                <button onclick="switchTestimonial(1)" id="t-dot-1" class="w-2 h-2 rounded-full bg-gray-600 hover:bg-gold-500 transition-all"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Elegant Accordion-style FAQ Section -->
+    <section id="faq" class="py-24 relative z-20 max-w-4xl mx-auto px-6">
+        <div class="text-center mb-16 reveal">
+            <span class="text-xs uppercase tracking-[0.3em] text-gold-500 font-semibold mb-3">FAQ</span>
+            <h2 class="font-serif text-3xl text-white">General Inquiries</h2>
+            <p class="text-gray-400 text-xs font-light mt-3">Answers to frequently asked questions regarding our layout and policies.</p>
+        </div>
+
+        <div class="space-y-4 reveal">
+            <!-- Accordion Item 1 -->
+            <div class="faq-item glass-card rounded-xl border border-white/5 overflow-hidden transition-all duration-300">
+                <button onclick="toggleFAQ(this)" class="w-full flex justify-between items-center px-6 py-5 text-left text-white focus:outline-none hover:bg-white/[0.02] transition-colors">
+                    <span class="font-serif text-sm md:text-base font-medium">Are pets permitted inside the dining area?</span>
+                    <i class="fa-solid fa-plus text-xs text-gold-500 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-content px-6 pb-5">
+                    <p class="text-xs text-gray-400 leading-relaxed font-light">
+                        Yes, dogs are warmly welcomed inside the main seating areas. We ask that they remain calmly seated to ensure a quiet and comfortable experience for all guests.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Accordion Item 2 -->
+            <div class="faq-item glass-card rounded-xl border border-white/5 overflow-hidden transition-all duration-300">
+                <button onclick="toggleFAQ(this)" class="w-full flex justify-between items-center px-6 py-5 text-left text-white focus:outline-none hover:bg-white/[0.02] transition-colors">
+                    <span class="font-serif text-sm md:text-base font-medium">What parking options are available at the venue?</span>
+                    <i class="fa-solid fa-plus text-xs text-gold-500 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-content px-6 pb-5">
+                    <p class="text-xs text-gray-400 leading-relaxed font-light">
+                        Free street parking is widely available around the property, alongside designated wheelchair-accessible car park bays for your convenience.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Accordion Item 3 -->
+            <div class="faq-item glass-card rounded-xl border border-white/5 overflow-hidden transition-all duration-300">
+                <button onclick="toggleFAQ(this)" class="w-full flex justify-between items-center px-6 py-5 text-left text-white focus:outline-none hover:bg-white/[0.02] transition-colors">
+                    <span class="font-serif text-sm md:text-base font-medium">Are table reservations required beforehand?</span>
+                    <i class="fa-solid fa-plus text-xs text-gold-500 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-content px-6 pb-5">
+                    <p class="text-xs text-gray-400 leading-relaxed font-light">
+                        Reservations are requested and highly recommended for weekend dinners and large groups to ensure table availability, though walk-ins are welcomed as well.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Accordion Item 4 -->
+            <div class="faq-item glass-card rounded-xl border border-white/5 overflow-hidden transition-all duration-300">
+                <button onclick="toggleFAQ(this)" class="w-full flex justify-between items-center px-6 py-5 text-left text-white focus:outline-none hover:bg-white/[0.02] transition-colors">
+                    <span class="font-serif text-sm md:text-base font-medium">Which payment methods are accepted?</span>
+                    <i class="fa-solid fa-plus text-xs text-gold-500 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-content px-6 pb-5">
+                    <p class="text-xs text-gray-400 leading-relaxed font-light">
+                        We accept a wide variety of payment options, including standard credit and debit cards, Google Pay, NFC mobile payments, and Pluxee meal coupons.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map & Modern Footprint -->
+    <footer class="relative z-20 border-t border-white/5 pt-20 pb-12 bg-dark-900">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-12 gap-12 mb-16">
+            
+            <div class="lg:col-span-5 flex flex-col">
+                <a href="#" class="font-serif text-2xl tracking-widest text-white mb-6">THE LANDMARK</a>
+                <p class="text-xs text-gray-400 font-light leading-relaxed max-w-sm mb-6">
+                    Hajipur's premium space curated to foster dining excellence. Combining high accessibility standardizations, premium culinary recipes, and comfortable interiors.
+                </p>
+                <div class="flex gap-4">
+                    <a href="tel:+919155298225" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-gold-500 hover:border-gold-500/50 transition-all">
+                        <i class="fa-solid fa-phone text-sm"></i>
+                    </a>
+                    <a href="https://wa.me/919155298225" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-emerald-500 hover:border-emerald-500/50 transition-all">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                    </a>
+                    <a href="https://maps.google.com/?q=The+Landmark+Hotel+Anwarpur+Chowk+Hajipur" target="_blank" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-blue-500 hover:border-blue-500/50 transition-all">
+                        <i class="fa-solid fa-map-location-dot text-sm"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Address and Details -->
+            <div class="lg:col-span-4 flex flex-col text-sm text-gray-400">
+                <h4 class="font-serif text-white text-base mb-4 font-medium">The Sanctuary Location</h4>
+                <p class="mb-4 leading-relaxed font-light">
+                    M6R4+JVX, Near Shiv Mandir,<br>
+                    Behind Pankaj Hotel, Anwarpur Chowk,<br>
+                    Anwarpur, Hajipur, Vaishali,<br>
+                    Bihar - 844101
+                </p>
+                <p class="mb-1 font-light"><strong class="text-gray-300">Reservations:</strong> +91 91552 98225</p>
+                <p class="font-light"><strong class="text-gray-300">Dining Style:</strong> Trendy, Quiet, Inclusive, Family-Friendly</p>
+            </div>
+
+            <!-- Maps Widget -->
+            <div class="lg:col-span-3">
+                <h4 class="font-serif text-white text-base mb-4 font-medium">Map Link</h4>
+                <div class="rounded-lg overflow-hidden border border-white/10 relative h-48 bg-dark-800">
+                    <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80" alt="Map graphic placeholder" class="w-full h-full object-cover brightness-50">
+                    <div class="absolute inset-0 flex items-center justify-center p-4 bg-dark-900/60 text-center">
+                        <a href="https://maps.google.com/?q=The+Landmark+Hotel+Anwarpur+Chowk+Hajipur" target="_blank" class="glass-card hover:bg-gold-500 hover:text-dark-900 text-xs text-white uppercase tracking-widest px-4 py-2.5 rounded transition-all">
+                            Open in Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-500">
+            <p>&copy; 2026 The Landmark Hotel, Hajipur. All Rights Reserved.</p>
+            <p class="mt-4 sm:mt-0">Premium Digital Architecture</p>
+        </div>
+    </footer>
+
+    <!-- Premium Interactive Booking Popup Modal -->
+    <div id="reservation-modal" class="fixed inset-0 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 p-4">
+        <div class="absolute inset-0 bg-dark-950/90 backdrop-blur-md" onclick="closeReservationModal()"></div>
+        
+        <div class="glass-card w-full max-w-lg rounded-2xl p-6 lg:p-8 relative z-10 border border-gold-500/20 shadow-2xl scale-95 transition-all duration-300" id="modal-container">
+            <button onclick="closeReservationModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <span class="text-[10px] uppercase tracking-[0.3em] text-gold-500 font-semibold mb-2 block">Secure Your Table</span>
+            <h3 class="font-serif text-2xl lg:text-3xl text-white mb-6">Reservation Lounge</h3>
+
+            <form id="booking-form" onsubmit="handleFormSubmission(event)" class="space-y-4 text-xs">
+                <div>
+                    <label class="block text-gray-400 uppercase tracking-widest mb-1.5 font-medium">Guest Name</label>
+                    <input type="text" required placeholder="John Doe" class="w-full bg-dark-900 border border-white/10 focus:border-gold-500 rounded px-4 py-3 text-white placeholder-gray-600 focus:outline-none transition-all">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-gray-400 uppercase tracking-widest mb-1.5 font-medium">Date</label>
+                        <input type="date" required class="w-full bg-dark-900 border border-white/10 focus:border-gold-500 rounded px-4 py-3 text-white focus:outline-none transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-gray-400 uppercase tracking-widest mb-1.5 font-medium">Time Slot</label>
+                        <select required class="w-full bg-dark-900 border border-white/10 focus:border-gold-500 rounded px-4 py-3 text-white focus:outline-none transition-all">
+                            <option value="lunch">Lunch</option>
+                            <option value="dinner">Dinner</option>
+                            <option value="teatime">Afternoon Tea / Coffee</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-gray-400 uppercase tracking-widest mb-1.5 font-medium">Number of Guests</label>
+                    <input type="number" min="1" max="20" placeholder="2" required class="w-full bg-dark-900 border border-white/10 focus:border-gold-500 rounded px-4 py-3 text-white placeholder-gray-600 focus:outline-none transition-all">
+                </div>
+
+                <div class="pt-4">
+                    <button type="submit" class="w-full bg-gold-500 text-dark-900 py-4 rounded font-semibold tracking-widest uppercase hover:bg-white hover:text-dark-900 transition-all duration-300 shadow-lg">
+                        Confirm Reservation Intent
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-4 pt-4 border-t border-white/5 text-center">
+                <p class="text-[10px] text-gray-400">Prefer direct calling or live WhatsApp support?</p>
+                <div class="flex justify-center gap-4 mt-2">
+                    <a href="tel:+919155298225" class="text-gold-500 hover:underline">Call: +91 91552 98225</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="https://wa.me/919155298225" class="text-emerald-500 hover:underline">Live WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Implementations -->
+    <script>
+        // Custom Follower Physics Cursor
+        const ring = document.getElementById('custom-cursor-ring');
+        const dot = document.getElementById('custom-cursor-dot');
+        
+        let ringX = 0, ringY = 0;
+        let mouseX = 0, mouseY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            dot.style.left = mouseX + 'px';
+            dot.style.top = mouseY + 'px';
+        });
+
+        function animateRing() {
+            let distX = mouseX - ringX;
+            let distY = mouseY - ringY;
+            
+            // Drag inertia
+            ringX += distX * 0.15;
+            ringY += distY * 0.15;
+            
+            ring.style.left = ringX + 'px';
+            ring.style.top = ringY + 'px';
+            
+            requestAnimationFrame(animateRing);
+        }
+        animateRing();
+
+        // Expansive state updates on interactive elements
+        const clickables = document.querySelectorAll('a, button, select, input, option');
+        clickables.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                ring.style.width = '64px';
+                ring.style.height = '64px';
+                ring.style.borderColor = '#d4af37';
+                ring.style.backgroundColor = 'rgba(214,175,55,0.05)';
+            });
+            item.addEventListener('mouseleave', () => {
+                ring.style.width = '44px';
+                ring.style.height = '44px';
+                ring.style.borderColor = 'rgba(214, 175, 55, 0.4)';
+                ring.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // Parallax and Header styling update on scroll
+        window.addEventListener('scroll', () => {
+            const heroImg = document.getElementById('hero-img');
+            const scrollPos = window.scrollY;
+            heroImg.style.transform = `scale(1.1) translateY(${scrollPos * 0.08}px)`;
+
+            const header = document.getElementById('main-header');
+            if (scrollPos > 100) {
+                header.classList.add('bg-dark-950/85', 'backdrop-blur-md', 'shadow-lg', 'border-white/5');
+            } else {
+                header.classList.remove('bg-dark-950/85', 'backdrop-blur-md', 'shadow-lg', 'border-white/5');
+            }
+        });
+
+        // Scroll reveals
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.12
+        });
+        revealElements.forEach(el => observer.observe(el));
+
+        // Interactive Filterable Menu
+        function filterMenu(category) {
+            const menuItems = document.querySelectorAll('.menu-item');
+            const tabs = document.querySelectorAll('.menu-tab-btn');
+
+            tabs.forEach(tab => {
+                tab.classList.remove('active', 'text-gold-500', 'border-gold-500', 'bg-gold-500/10');
+                tab.classList.add('text-gray-400', 'border-white/5');
+            });
+
+            event.target.classList.add('active', 'text-gold-500', 'border-gold-500', 'bg-gold-500/10');
+            event.target.classList.remove('text-gray-400', 'border-white/5');
+
+            menuItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    if (category === 'all' || item.classList.contains(category)) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        item.style.display = 'none';
+                    }
+                }, 300);
+            });
+        }
+
+        // Vibe Discovery Engine datasets
+        const vibeData = {
+            focused: {
+                img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80",
+                tag: "Morning Setup",
+                title: "Single Origin Macchiato",
+                desc: "Crafted for quiet mornings or calm remote work sessions. Balanced espresso layers paired with microfoam."
+            },
+            social: {
+                img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80",
+                tag: "Group Serving",
+                title: "Curated Gourmet Thali",
+                desc: "Perfect for sharing with friends and family. Generous assortment of traditional chef-crafted specialties."
+            },
+            indulgent: {
+                img: "https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80",
+                tag: "Dessert Delight",
+                title: "Glazed Hot Fudge Fondant",
+                desc: "An indulgent choice for celebrations. Rich warm cocoa crumb accented by premium cold artisan ice cream."
+            }
+        };
+
+        function revealVibe(vibeKey) {
+            const btns = document.querySelectorAll('.vibe-btn');
+            btns.forEach(btn => {
+                btn.classList.remove('active', 'text-gold-500', 'border-gold-500', 'bg-gold-500/10');
+                btn.classList.add('text-gray-400', 'border-white/5');
+            });
+
+            event.target.classList.add('active', 'text-gold-500', 'border-gold-500', 'bg-gold-500/10');
+            event.target.classList.remove('text-gray-400', 'border-white/5');
+
+            const card = document.getElementById('vibe-card');
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(10px)';
+
+            setTimeout(() => {
+                document.getElementById('vibe-img').src = vibeData[vibeKey].img;
+                document.getElementById('vibe-tag').textContent = vibeData[vibeKey].tag;
+                document.getElementById('vibe-title').textContent = vibeData[vibeKey].title;
+                document.getElementById('vibe-desc').textContent = vibeData[vibeKey].desc;
+
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 300);
+        }
+
+        // Testimonial switching mechanics
+        const testimonials = document.querySelectorAll('.testimonial-slide');
+        function switchTestimonial(index) {
+            testimonials.forEach((slide, i) => {
+                slide.classList.remove('opacity-100');
+                slide.classList.add('opacity-0');
+                document.getElementById(`t-dot-${i}`).classList.remove('bg-gold-500');
+                document.getElementById(`t-dot-${i}`).classList.add('bg-gray-600');
+            });
+
+            testimonials[index].classList.remove('opacity-0');
+            testimonials[index].classList.add('opacity-100');
+            document.getElementById(`t-dot-${index}`).classList.remove('bg-gray-600');
+            document.getElementById(`t-dot-${index}`).classList.add('bg-gold-500');
+        }
+
+        let testimonialIndex = 0;
+        setInterval(() => {
+            testimonialIndex = (testimonialIndex + 1) % testimonials.length;
+            switchTestimonial(testimonialIndex);
+        }, 8000);
+
+        // Accordion (FAQ) mechanics
+        function toggleFAQ(button) {
+            const item = button.parentElement;
+            const icon = button.querySelector('i');
+            
+            // Check if already active
+            const isActive = item.classList.contains('active');
+            
+            // Close all items
+            document.querySelectorAll('.faq-item').forEach(el => {
+                el.classList.remove('active');
+                el.querySelector('i').className = "fa-solid fa-plus text-xs text-gold-500 transition-transform duration-300";
+            });
+
+            // Toggle selected item
+            if (!isActive) {
+                item.classList.add('active');
+                icon.className = "fa-solid fa-minus text-xs text-gold-500 transition-transform duration-300";
+            }
+        }
+
+        // Booking Modal functions
+        const modal = document.getElementById('reservation-modal');
+        const modalContainer = document.getElementById('modal-container');
+
+        function openReservationModal() {
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalContainer.classList.remove('scale-95');
+            modalContainer.classList.add('scale-100');
+        }
+
+        function closeReservationModal() {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalContainer.classList.remove('scale-100');
+            modalContainer.classList.add('scale-95');
+        }
+
+        function handleFormSubmission(event) {
+            event.preventDefault();
+            alert("Thank you! Your table request has been noted. We will contact you at +91 91552 98225 shortly to finalize your reservation.");
+            closeReservationModal();
+            document.getElementById('booking-form').reset();
+        }
+    </script>
+</body>
+</html>
